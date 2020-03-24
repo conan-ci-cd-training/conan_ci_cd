@@ -1,10 +1,5 @@
 .DS_Store
 revisions/.DS_Store
-revisions/libHello/.DS_Store
-revisions/libHello/conanfile.py
-revisions/libHello/src/CMakeLists.txt
-revisions/libHello/src/hello.cpp
-revisions/libHello/src/hello.h
 package_id_modes/App
 package_id_modes/libA
 package_id_modes/libB
