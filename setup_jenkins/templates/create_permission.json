@@ -16,7 +16,7 @@
     "repositories": ["artifactory-build-info"],
     "actions": {
       "users" : {
-        "<USER>": ["read","manage","annotate","delete"]
+        "<USER>": ["read","write","annotate","delete"]
       }
     }
   }
