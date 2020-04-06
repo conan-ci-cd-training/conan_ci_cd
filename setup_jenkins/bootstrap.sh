@@ -18,7 +18,7 @@ curl -uadmin:$2 -XPUT http://$1/artifactory/api/repositories/conan-tmp -T conan-
 curl -uadmin:$2 -XPUT http://$1/artifactory/api/repositories/conan-develop -T conan-develop.json -H "Content-Type: application/json"
 
 # create user
-sed "s/<USER>/myuser/" create_user.json > user.json
+sed "s/<USER>/myuser/" templates/create_user.json > user.json
 curl -uadmin:$2 -XPUT http://$1/artifactory/api/security/users/myuser -T user.json -H "Content-Type: application/json"
 
 # create permission
