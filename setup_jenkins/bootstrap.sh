@@ -29,7 +29,7 @@ curl -uadmin:$2 -XPUT http://$1/artifactory/api/v2/security/permissions/${permis
 
 conan remote add conan-develop http://$1:8081/artifactory/api/conan/conan-develop
 conan remote add conan-tmp http://$1:8081/artifactory/api/conan/conan-tmp
-conan user -p ${mypassword} -r conan-develop ${user}
-conan user -p ${mypassword} -r conan-tmp ${user}
+conan user -p ${password} -r conan-develop ${user}
+conan user -p ${password} -r conan-tmp ${user}
 
 docker exec -it jenkins /bin/bash -c "curl https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/setup_jenkins/init_jenkins.sh -O;chmod +x init_jenkins.sh;./init_jenkins.sh $1 $2 $3"
