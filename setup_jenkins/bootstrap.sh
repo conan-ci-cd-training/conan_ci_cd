@@ -7,8 +7,8 @@
 # param 3: Jenkins administrator password
 
 permission=conan-ci2
-user=myuser
-password=mypassword
+user=conan
+password=conan2020
 
 curl -uadmin:$2 -XPOST http://$1/artifactory/api/security/groups/readers -d '{"autoJoin":"false"}' -H "Content-Type: application/json"
 
