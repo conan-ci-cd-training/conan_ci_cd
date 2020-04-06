@@ -38,6 +38,9 @@ conan remote add conan-tmp http://$1:8081/artifactory/api/conan/conan-tmp
 conan user -p ${password} -r conan-develop ${user}
 conan user -p ${password} -r conan-tmp ${user}
 
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+
 ## Jenkins configuration
 
 docker exec -it jenkins /bin/bash -c "curl https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/setup_jenkins/init_jenkins.sh -O;chmod +x init_jenkins.sh;./init_jenkins.sh $1 $2 $3"
