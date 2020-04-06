@@ -1,0 +1,7 @@
+{
+  "name": "<USER>",
+  "email" : "<USER>@test.com",
+  "password": "conan2020",
+  "disableUIAccess" : false,
+  "realm": "Internal"
+}

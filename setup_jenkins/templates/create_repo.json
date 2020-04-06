@@ -1,0 +1,8 @@
+{
+  "key": "<REPO_NAME>",
+  "rclass" : "local",
+  "packageType": "conan",
+  "repoLayoutRef" : "conan-default",
+  "description": "created by API",
+  "notes": "created by Rest API"
+}
