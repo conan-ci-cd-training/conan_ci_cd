@@ -7,6 +7,8 @@
 # param 3: Jenkins administrator password
 
 permission=conan-ci2
+user=myuser
+password=mypassword
 
 curl -uadmin:$2 -XPOST http://$1/artifactory/api/security/groups/readers -d '{"autoJoin":"false"}' -H "Content-Type: application/json"
 
@@ -18,7 +20,7 @@ curl -uadmin:$2 -XPUT http://$1/artifactory/api/repositories/conan-tmp -T conan-
 curl -uadmin:$2 -XPUT http://$1/artifactory/api/repositories/conan-develop -T conan-develop.json -H "Content-Type: application/json"
 
 # create user
-sed "s/<USER>/myuser/" templates/create_user.json > user.json
+sed "s/<USER>/${user}/" templates/create_user.json | sed "s/<PASSWORD>/${password}/" > user.json
 curl -uadmin:$2 -XPUT http://$1/artifactory/api/security/users/myuser -T user.json -H "Content-Type: application/json"
 
 # create permission
