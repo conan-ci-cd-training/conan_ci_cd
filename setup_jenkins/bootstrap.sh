@@ -27,5 +27,9 @@ curl -uadmin:$2 -XPUT http://$1/artifactory/api/security/users/myuser -T user.js
 sed "s/<USER>/myuser/" templates/create_permission.json | sed "s/<NAME>/${permission}/"  | sed "s/<REPO1>/conan-tmp/"| sed "s/<REPO2>/conan-develop/"  > permission.json
 curl -uadmin:$2 -XPUT http://$1/artifactory/api/v2/security/permissions/${permission} -T permission.json -H "Content-Type: application/json"
 
+conan remote add conan-develop http://$1:8081/artifactory/api/conan/conan-develop
+conan remote add conan-tmp http://$1:8081/artifactory/api/conan/conan-tmp
+conan user -p ${mypassword} -r conan-develop ${user}
+conan user -p ${mypassword} -r conan-tmp ${user}
 
 docker exec -it jenkins /bin/bash -c "curl https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/setup_jenkins/init_jenkins.sh -O;chmod +x init_jenkins.sh;./init_jenkins.sh $1 $2 $3"
