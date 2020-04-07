@@ -28,7 +28,7 @@ sed "s/<USER>/${user}/" templates/create_user.json | sed "s/<PASSWORD>/${passwor
 curl -uadmin:$2 -XPUT http://$1/artifactory/api/security/users/${user} -T user.json -H "Content-Type: application/json"
 
 # create permission
-sed "s/<USER>/${user}/" templates/create_permission.json | sed "s/<NAME>/${permission}/"  | sed "s/<REPO1>/conan-tmp/"| sed "s/<REPO2>/conan-develop/"  > permission.json
+sed "s/<USER>/${user}/" templates/create_permission.json | sed "s/<NAME>/${permission}/"  | sed "s/<REPO1>/conan-tmp/"| sed "s/<REPO2>/conan-develop/" | sed "s/<REPO3>/conan-metadata/" > permission.json
 curl -uadmin:$2 -XPUT http://$1/artifactory/api/v2/security/permissions/${permission} -T permission.json -H "Content-Type: application/json"
 
 ## Conan client configuration
