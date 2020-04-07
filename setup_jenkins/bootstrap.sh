@@ -15,11 +15,13 @@ password=conan2020
 curl -uadmin:$2 -XPOST http://$1/artifactory/api/security/groups/readers -d '{"autoJoin":"false"}' -H "Content-Type: application/json"
 
 # create repo
-sed "s/<REPO_NAME>/conan-tmp/" templates/create_repo.json > conan-tmp.json
-sed "s/<REPO_NAME>/conan-develop/" templates/create_repo.json > conan-develop.json
+sed "s/<REPO_NAME>/conan-tmp/" templates/create_repo.json | sed "s/<REPO_TYPE>/conan/" | sed "s/<REPO_LAYOUT>/conan-default/" > conan-tmp.json
+sed "s/<REPO_NAME>/conan-develop/" templates/create_repo.json | sed "s/<REPO_TYPE>/conan/" | sed "s/<REPO_LAYOUT>/conan-default/" > conan-develop.json
+sed "s/<REPO_NAME>/conan-metadata/" templates/create_repo.json | sed "s/<REPO_TYPE>/generic/" | sed "s/<REPO_LAYOUT>/simple-default/" > conan-metadata.json
 
 curl -uadmin:$2 -XPUT http://$1/artifactory/api/repositories/conan-tmp -T conan-tmp.json -H "Content-Type: application/json"
 curl -uadmin:$2 -XPUT http://$1/artifactory/api/repositories/conan-develop -T conan-develop.json -H "Content-Type: application/json"
+curl -uadmin:$2 -XPUT http://$1/artifactory/api/repositories/conan-metadata -T conan-metadata.json -H "Content-Type: application/json"
 
 # create user
 sed "s/<USER>/${user}/" templates/create_user.json | sed "s/<PASSWORD>/${password}/" > user.json
