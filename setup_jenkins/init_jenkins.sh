@@ -18,6 +18,7 @@ conan config install https://github.com/conan-ci-cd-training/settings.git
 git clone https://github.com/conan-ci-cd-training/libA.git
 git clone https://github.com/conan-ci-cd-training/libB.git
 git clone https://github.com/conan-ci-cd-training/libC.git
+git clone https://github.com/conan-ci-cd-training/libD.git
 git clone https://github.com/conan-ci-cd-training/App.git
 git clone https://github.com/conan-ci-cd-training/App2.git
 git clone https://github.com/conan-ci-cd-training/products.git
@@ -25,6 +26,7 @@ git clone https://github.com/conan-ci-cd-training/products.git
 conan export libA mycompany/stable
 conan export libB mycompany/stable
 conan export libC mycompany/stable
+conan export libD mycompany/stable
 conan export App mycompany/stable
 conan export App2 mycompany/stable
 
