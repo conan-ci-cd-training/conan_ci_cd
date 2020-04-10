@@ -1,8 +1,8 @@
 
 # Exercise
 
-git clone https://github.com/conan-ci-cd-training/libA.git
-cd libA
+git clone https://github.com/conan-ci-cd-training/libB.git
+cd libB
 git checkout feature/add_comments
 
 # want to build with several profiles
