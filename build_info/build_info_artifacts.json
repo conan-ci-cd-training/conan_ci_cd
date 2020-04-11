@@ -1,0 +1,4 @@
+builds.find({
+    "name": "app1",
+    "number": "2",
+}).include("module.artifact.item.name", "module.artifact.item.path")

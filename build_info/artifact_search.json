@@ -1,0 +1,6 @@
+items.find({
+    "repo": "conan-develop",
+    "path": { "$match": "libA/1.0/*" },
+    "name": "conaninfo.txt",
+    "@conan.settings.os": "Linux"
+}).include("path","@conan.settings.os","@conan.settings.arch","@conan.settings.build_type")

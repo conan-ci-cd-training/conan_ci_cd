@@ -1,0 +1,5 @@
+builds.find({
+    "name": "app1",
+    "number": "2",
+    "module.artifact.dependency.@conan.settings.build_type" : "Linux"
+}).include("module.dependency.item.name", "module.dependency.item.path")
