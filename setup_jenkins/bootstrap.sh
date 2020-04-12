@@ -45,6 +45,10 @@ conan user -p ${password} -r conan-tmp ${user}
 git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
 
+echo "------ Set labs scripts permission ------"
+
+find .. -name "*.sh" -exec chmod +x {} \;
+
 echo "------ Jenkins configuration ------"
 
 docker exec -it jenkins /bin/bash -c "curl https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/setup_jenkins/init_jenkins.sh -O;chmod +x init_jenkins.sh;./init_jenkins.sh ${artifactory_pass} ${jenkins_pass}"
