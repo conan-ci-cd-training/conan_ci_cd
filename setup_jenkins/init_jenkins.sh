@@ -57,4 +57,8 @@ tar -xvf jenkins_jobs.tgz --directory /var/lib/jenkins/jobs
 
 echo "------ Restart Jenkins ------"
 
+echo "--------------------------------"
+echo "------ FINISHED BOOTSTRAP ------"
+echo "--------------------------------"
+
 curl -X POST -u administrator:${jenkins_pass} http://${address}:8080/restart
