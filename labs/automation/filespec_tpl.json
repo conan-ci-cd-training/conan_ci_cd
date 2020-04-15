@@ -1,0 +1,12 @@
+{
+  "files": [{
+    "aql": {
+      "items.find": {
+	"repo": "conan-develop",
+	"path": "PATH",
+	"name" : "conan_package.tgz"
+      }
+    },
+    "flat":"true"
+  }]
+}
