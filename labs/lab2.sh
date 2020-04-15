@@ -12,5 +12,5 @@ $ conan graph lock libB/1.0@mycompany/stable --lockfile=../lockfiles/debug.lock 
 $ conan graph lock libB/1.0@mycompany/stable --lockfile=../lockfiles/release.lock -r conan-develop --profile release-gcc6
 
 # create packages with those lockfiles
-$ conan create . mycompany/stable --lockfile=../lockfiles/debug.lock -r conan-develop
-$ conan create . mycompany/stable --lockfile=../lockfiles/release.lock -r conan-develop
+$ conan create . mycompany/stable --lockfile=../lockfiles/debug.lock
+$ conan create . mycompany/stable --lockfile=../lockfiles/release.lock
