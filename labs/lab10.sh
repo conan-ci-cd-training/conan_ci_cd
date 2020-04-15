@@ -15,7 +15,7 @@ conan graph lock . --profile=release-gcc6 --lockfile=app2_release.lock -r conan-
 conan create . mycompany/stable --lockfile=app2_release.lock 
 
 # upload App2
-conan upload App2/1.0@mycompany/stable -r conan-develop --confirm --force
+conan upload App2/1.0@mycompany/stable -r conan-develop --all  --confirm --force
 
 # create build infos
 conan_build_info --v2 create debug_bi.json --lockfile=app2_debug.lock --user=conan --password=conan2020 && cat debug_bi.json 
