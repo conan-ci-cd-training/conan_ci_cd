@@ -1,4 +1,0 @@
-builds.find({
-    "name": "app1",
-    "number": "2",
-}).include("module.dependency.item.name", "module.dependency.item.path")
