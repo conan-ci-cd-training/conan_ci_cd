@@ -2,22 +2,16 @@
 
 ## lab11: 
 
-conan_build_info --v2 start app1 2
+jfrog rt c --interactive=false  --url=http://jfrog.local:8081/artifactory --user=conan --password=conan2020 art7 
+# generate and upload Debian package from App2 Conan package
+cd ~/conan_ci_cd/labs && chmod +x generateDebianPkg.sh && ./generateDebianPkg.sh conan conan2020 
 
-# profile release
-conan graph lock libB/1.0@mycompany/stable --profile=release-gcc6 --lockfile=libB-release.lock
-conan create libB mycompany/stable --lockfile=libB-release.lock
+# create custom Build Info 
+jfrog rt u debian_gen/myapp2_1.0.deb app-debian-sit-local/pool/ --build-name=myapp2 --build-number=1
+jfrog rt d conan-metadata/app_release.lock --build-name=myapp2 --build-number=1
+jfrog rt bad myapp2 1 conan_package.tgz
+jfrog rt bce myapp2 1
+jfrog rt bp myapp2 1
 
-# profile debug
-conan graph lock libB/1.0@mycompany/stable --profile=debug-gcc6 --lockfile=libB-debug.lock
-conan create libB mycompany/stable --lockfile=libB-debug.lock --build=missing
-
-conan upload libB --all -r conan-tmp --confirm
-
-# create build info and merge
-conan_build_info --v2 create bi-release.json --lockfile=libB-release.lock --user=conan --password=conan2020
-conan_build_info --v2 create bi-debug.json --lockfile=libB-debug.lock --user=conan --password=conan2020
-# merge build info & publish 
-conan_build_info --v2 update --output-file final_bi.json bi-release.json bi-debug.json && cat final_bi.json
-conan_build_info --v2 publish final_bi.json --url=http://jfrog.local:8081/artifactory --user=conan --password=conan2020
-conan_build_info --v2 stop
+# Promote with JFrog CLI  
+jfrog rt bpr myapp2 1 app-debian-uat-local --status="SIT_OK"  --comment="passed integration tests" --include-dependencies=false --copy=false
