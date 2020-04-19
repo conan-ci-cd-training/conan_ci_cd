@@ -1,9 +1,9 @@
 items.find({
     "repo": "conan-develop",
-    "path": { "$match" : "mycompany/App2/*"}, 
+    "path": { "$match" : "mycompany/App/1.0/*"}, 
     "name": "conaninfo.txt",
     "$and": [
-        { "@build.name": "app2" }, 
+        { "@build.name": "conan-app" }, 
         { "@build.number": "1" }, 
         { "@conan.settings.os": "Linux" }, 
         { "@conan.settings.build_type": "Release" },
