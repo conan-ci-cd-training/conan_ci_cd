@@ -2,7 +2,7 @@
 
 conan graph lock App/1.0@mycompany/stable --profile=debug-gcc6 --lockfile=app_debug.lock -r conan-develop
 
-# 2020/04 : bug detected 
+# https://github.com/conan-io/conan/issues/6845
 # lockfile as to be named conan.lock for "conan install" otherwise, it's not updated
 for i in libD App; do 
   cp app_debug.lock conan.lock
