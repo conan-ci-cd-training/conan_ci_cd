@@ -12,6 +12,11 @@ address="jfrog.local"
 artifactory_pass=$1
 jenkins_pass=$2
 
+if [[ $# -ne 2 ]] ; then
+    echo 'Please provide passwords for Artifactory and Jenkins. You will find them in your orbitera e-mail.'
+    exit 1
+fi
+
 echo "------ Artifactory configuration ------"
 
 curl -uadmin:${artifactory_pass} -XPOST http://${address}/artifactory/api/security/groups/readers -d '{"autoJoin":"false"}' -H "Content-Type: application/json"
