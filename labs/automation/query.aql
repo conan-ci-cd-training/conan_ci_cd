@@ -6,4 +6,4 @@ items.find({
         { "@build.number": "1" }, 
         { "@profile": "gcc6-release" }
     ]
-}).include("repo","path","name","@profile")
+}).include("repo","path","name","@app.version")
