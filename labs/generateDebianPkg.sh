@@ -8,21 +8,18 @@ rm -rf debian_gen
 mkdir -p debian_gen/myapp_${version}/{DEBIAN,var}
 mkdir -p debian_gen/myapp_${version}/var/myapp
 
-#extract app
-tar -xzf conan_package.tgz -C debian_gen/ 
-
 cat << 'EOL' >> debian_gen/myapp_${version}/DEBIAN/control
-Package: app 
+Package: app
 Architecture: all
 Maintainer: Yann Chaysinh
 Priority: optional
 Version: <VERSION>
-Description: My Simple Debian package to deploy my 
+Description: My Simple Debian package to deploy App
 EOL
 
 sed -i "s/<VERSION>/${version}/" debian_gen/myapp_${version}/DEBIAN/control
 
-cp debian_gen/bin/App debian_gen/myapp_${version}/var/myapp/
+cp App/bin/App debian_gen/myapp_${version}/var/myapp/
 
 dpkg-deb --build debian_gen/myapp_${version}
 
