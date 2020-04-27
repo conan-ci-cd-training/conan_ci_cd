@@ -2,12 +2,12 @@
 
 ## lab12: 
 
-# AQL will return the PREV containing the conan_package.tgz
-cat automation/query.aql 
-prev=$(jfrog rt curl -XPOST api/search/aql -T automation/query.aql | grep path | cut -d\" -f4) && echo $prev
+# show filespec based on AQL
+cat automation/filespec.json
 
-sed "s#PATH#${prev}#" automation/filespec_tpl.json > filespec.json &&
-cat filespec.json
+# download lockfile based on properties + output “success”
+jfrog rt download --spec=automation/filespec.json 
 
-# download conan_package.tgz from build info + extract content into folders
-jfrog rt download --spec=filespec.json && ls -l conan_package.tgz
+# “deploy” the package referenced in the lockfile in the current path
+conan install App/1.0@mycompany/stable --lockfile app_release.lock -g deploy -r conan-develop
+ls -l App/ 
