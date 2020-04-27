@@ -48,7 +48,7 @@ echo "------ Configure Jenkins jobs ------"
 
 curl https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/setup_jenkins/jenkins_jobs.tgz -O
 
-tar -xvf jenkins_jobs.tgz --directory /var/lib/jenkins/jobs
+#tar -xvf jenkins_jobs.tgz --directory /var/lib/jenkins/jobs
 
 echo "------ Restart Jenkins ------"
 
