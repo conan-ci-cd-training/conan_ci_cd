@@ -7,6 +7,5 @@ jfrog rt c --interactive=false  --url=http://jfrog.local:8081/artifactory --user
 # show current art7 profile
 jfrog rt c show
 
-# ping doesn’t require authentication
-jfrog rt ping
+# test connection by listing the repo content
 jfrog rt search conan-metadata/
