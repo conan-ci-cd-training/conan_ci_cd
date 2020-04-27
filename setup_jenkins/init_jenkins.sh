@@ -25,6 +25,7 @@ git clone https://github.com/conan-ci-cd-training/libD.git
 git clone https://github.com/conan-ci-cd-training/App.git
 git clone https://github.com/conan-ci-cd-training/App2.git
 git clone https://github.com/conan-ci-cd-training/products.git
+git clone https://github.com/conan-ci-cd-training/release.git
 
 conan export libA mycompany/stable
 conan export libB mycompany/stable
