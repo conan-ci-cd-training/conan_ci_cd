@@ -12,7 +12,7 @@ mkdir -p debian_gen/myapp_${version}/var/myapp
 tar -xzf conan_package.tgz -C debian_gen/ 
 
 cat << 'EOL' >> debian_gen/myapp_${version}/DEBIAN/control
-Package: app2 
+Package: app 
 Architecture: all
 Maintainer: Yann Chaysinh
 Priority: optional
