@@ -2,6 +2,8 @@
 
 ## lab12: 
 
+cd /home/conan/conan_ci_cd/labs/promotion
+
 # show filespec based on AQL
 cat automation/filespec.json
 

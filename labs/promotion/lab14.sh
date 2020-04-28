@@ -2,6 +2,8 @@
 
 ## lab14: 
 
+cd /home/conan/conan_ci_cd/labs/promotion
+
 # define “artifact section” in build info
 # won’t be reuploaded as the JFrog CLI is checksum aware
 jfrog rt u debian_gen/myapp_1.0.deb app-debian-sit-local/pool/ --build-name=debian-app --build-number=1
