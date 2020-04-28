@@ -2,4 +2,5 @@
 
 ## lab13: 
 
-/home/conan/conan_ci_cd/labs/promotion/generateDebianPkg.sh conan conan2020 
+cd /home/conan/conan_ci_cd/labs/promotion
+./generateDebianPkg.sh conan conan2020
