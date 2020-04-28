@@ -2,6 +2,9 @@
 
 ## lab5: 
 
+# In the CI we would be in other job with a clean conan cache
+conan remove "*" -f
+
 # update cache with a specific revision of libB (doesn’t update libA in the cache)
 
 conan download libB/1.0@mycompany/stable#a6c44191b4b5391c3678ae1d458375ec -r conan-tmp --recipe
