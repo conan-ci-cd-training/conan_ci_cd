@@ -16,4 +16,3 @@ conan_build_info --v2 create release_bi.json --lockfile=app_release.lock --user=
 
 # create build info
 conan_build_info --v2 create debug_bi.json --lockfile=app_debug.lock --user=conan --password=conan2020 && cat debug_bi.json
-
