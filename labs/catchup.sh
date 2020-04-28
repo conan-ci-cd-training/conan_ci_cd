@@ -49,7 +49,7 @@ lab12() {
 }
 
 lab13() {
-    ./promotion/generateDebianPkg.sh conan conan2020 
+    ./promotion/lab13.sh
 }
 
 lab14() {
