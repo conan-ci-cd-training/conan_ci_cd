@@ -41,23 +41,23 @@ lab10() {
 }
 
 lab11() {
-    ./lab11.sh
+    ./promotion/lab11.sh
 }
 
 lab12() {
-    ./lab12.sh
+    ./promotion/lab12.sh
 }
 
 lab13() {
-    ./lab13.sh
+    ./promotion/lab13.sh
 }
 
 lab14() {
-    ./lab14.sh
+    ./promotion/lab14.sh
 }
 
 lab15() {
-    ./lab15.sh
+    ./promotion/lab15.sh
 }
 
 run_option() {
