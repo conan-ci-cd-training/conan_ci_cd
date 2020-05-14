@@ -1,0 +1,75 @@
+def user_channel = "mycompany/stable"
+def config_url = "https://github.com/conan-ci-cd-training/settings.git"
+def conan_develop_repo = "conan-develop"
+def conan_tmp_repo = "conan-tmp"
+def artifactory_metadata_repo = "conan-metadata"
+def artifactory_url = (env.ARTIFACTORY_URL != null) ? "${env.ARTIFACTORY_URL}" : "jfrog.local"
+
+def profiles = [
+  "debug-gcc6": "conanio/gcc6",	
+  "release-gcc6": "conanio/gcc6"	
+]
+
+def build_result = [:]
+
+def get_stages(profile, docker_image, user_channel, config_url, conan_develop_repo, conan_tmp_repo, artifactory_metadata_repo, artifactory_url) {
+    return {
+        stage(profile) {
+            node {
+                docker.image(docker_image).inside("--net=host") {
+                    withEnv(["CONAN_USER_HOME=${env.WORKSPACE}/conan_cache"]) {
+                        def lockfile = "${profile}.lock"
+                        def buildInfoFilename = "${profile}.json"
+                        try {
+                            stage("Configure Conan") {
+                                sh "conan --version"
+                                sh "conan config install ${config_url}"
+                                sh "conan remote add ${conan_develop_repo} http://${artifactory_url}:8081/artifactory/api/conan/${conan_develop_repo}" // the namme of the repo is the same that the arttifactory key
+                                sh "conan remote add ${conan_tmp_repo} http://${artifactory_url}:8081/artifactory/api/conan/${conan_tmp_repo}" // the namme of the repo is the same that the arttifactory key
+                                withCredentials([usernamePassword(credentialsId: 'artifactory-credentials', usernameVariable: 'ARTIFACTORY_USER', passwordVariable: 'ARTIFACTORY_PASSWORD')]) {
+                                    sh "conan user -p ${ARTIFACTORY_PASSWORD} -r ${conan_develop_repo} ${ARTIFACTORY_USER}"
+                                    sh "conan user -p ${ARTIFACTORY_PASSWORD} -r ${conan_tmp_repo} ${ARTIFACTORY_USER}"
+                                }
+                            }
+                            // this would be automatically done by jenkins when detects a commit to a new
+                            // feature branch, and would clone that branch
+                            stage("Clone repository") {
+                                sh "git clone https://github.com/conan-ci-cd-training/libB.git"
+                                sh "cd libB"
+                                sh "git checkout feature/add_comments"
+                            }
+                            stage("Create package") {                                
+                                sh "conan graph lock . --profile ${profile} --lockfile=${lockfile} -r ${conan_develop_repo}"
+                                sh "cat ${lockfile}"
+                                sh "conan create . ${user_channel} --profile ${profile} --lockfile=${lockfile} -r ${conan_develop_repo} --ignore-dirty"
+                                sh "cat ${lockfile}"
+                            }
+                        }
+                        finally {
+                            deleteDir()
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+pipeline {
+    agent none
+    stages {
+
+        stage('Build') {
+            steps {
+                script {
+                    echo("${currentBuild.fullProjectName.tokenize('/')[0]}")
+                    build_result = withEnv(["CONAN_HOOK_ERROR_LEVEL=40"]) {
+                        parallel profiles.collectEntries { profile, docker_image ->
+                            ["${profile}": get_stages(profile, docker_image, user_channel, config_url, conan_develop_repo, conan_tmp_repo, artifactory_metadata_repo, artifactory_url)]
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
