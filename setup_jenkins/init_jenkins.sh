@@ -31,14 +31,14 @@ git clone --bare https://github.com/conan-ci-cd-training/App2.git
 git clone --bare https://github.com/conan-ci-cd-training/products.git
 git clone --bare https://github.com/conan-ci-cd-training/release.git
 
-echo "curl http://${address}:8080/git/notifyCommit?url=/repos/libA.git" > /git_server/libA.git/hooks/post-receive
-echo "curl http://${address}:8080/git/notifyCommit?url=/repos/libB.git" > /git_server/libB.git/hooks/post-receive
-echo "curl http://${address}:8080/git/notifyCommit?url=/repos/libC.git" > /git_server/libC.git/hooks/post-receive
-echo "curl http://${address}:8080/git/notifyCommit?url=/repos/libD.git" > /git_server/libD.git/hooks/post-receive
-echo "curl http://${address}:8080/git/notifyCommit?url=/repos/App.git" > /git_server/App.git/hooks/post-receive
-echo "curl http://${address}:8080/git/notifyCommit?url=/repos/App2.git" > /git_server/App2.git/hooks/post-receive
-echo "curl http://${address}:8080/git/notifyCommit?url=/repos/products.git" > /git_server/products.git/hooks/post-receive
-echo "curl http://${address}:8080/git/notifyCommit?url=/repos/release.git" > /git_server/release.git/hooks/post-receive
+echo "curl http://${address}:8080/git/notifyCommit?url=/git_server/libA.git" > /git_server/libA.git/hooks/post-receive
+echo "curl http://${address}:8080/git/notifyCommit?url=/git_server/libB.git" > /git_server/libB.git/hooks/post-receive
+echo "curl http://${address}:8080/git/notifyCommit?url=/git_server/libC.git" > /git_server/libC.git/hooks/post-receive
+echo "curl http://${address}:8080/git/notifyCommit?url=/git_server/libD.git" > /git_server/libD.git/hooks/post-receive
+echo "curl http://${address}:8080/git/notifyCommit?url=/git_server/App.git" > /git_server/App.git/hooks/post-receive
+echo "curl http://${address}:8080/git/notifyCommit?url=/git_server/App2.git" > /git_server/App2.git/hooks/post-receive
+echo "curl http://${address}:8080/git/notifyCommit?url=/git_server/products.git" > /git_server/products.git/hooks/post-receive
+echo "curl http://${address}:8080/git/notifyCommit?url=/git_server/release.git" > /git_server/release.git/hooks/post-receive
 
 mkdir /bootstrap_repos && cd /bootstrap_repos
 
