@@ -20,7 +20,9 @@ conan config install https://github.com/conan-ci-cd-training/settings.git
 
 echo "Clone libraries"
 
-mkdir /git_server && cd /git_server
+mkdir /var/lib/jenkins/git_server
+
+cd /var/lib/jenkins/git_server
 
 git clone --bare https://github.com/conan-ci-cd-training/libA.git
 git clone --bare https://github.com/conan-ci-cd-training/libB.git
@@ -31,59 +33,59 @@ git clone --bare https://github.com/conan-ci-cd-training/App2.git
 git clone --bare https://github.com/conan-ci-cd-training/products.git
 git clone --bare https://github.com/conan-ci-cd-training/release.git
 
-cat << 'EOL' > /git_server/libA.git/hooks/post-receive
+cat << 'EOL' > /var/lib/jenkins/git_server/libA.git/hooks/post-receive
 #!/bin/sh
 
-curl http://jfrog.local:8080/git/notifyCommit?url=/git_server/libA.git
+curl http://jfrog.local:8080/git/notifyCommit?url=/var/lib/jenkins/git_server/libA.git
 EOL
 
-cat << 'EOL' > /git_server/libB.git/hooks/post-receive
+cat << 'EOL' > /var/lib/jenkins/git_server/libB.git/hooks/post-receive
 #!/bin/sh
 
-curl http://jfrog.local:8080/git/notifyCommit?url=/git_server/libB.git
+curl http://jfrog.local:8080/git/notifyCommit?url=/var/lib/jenkins/git_server/libB.git
 EOL
 
-cat << 'EOL' > /git_server/libC.git/hooks/post-receive
+cat << 'EOL' > /var/lib/jenkins/git_server/libC.git/hooks/post-receive
 #!/bin/sh
 
-curl http://jfrog.local:8080/git/notifyCommit?url=/git_server/libC.git
+curl http://jfrog.local:8080/git/notifyCommit?url=/var/lib/jenkins/git_server/libC.git
 EOL
 
-cat << 'EOL' > /git_server/libD.git/hooks/post-receive
+cat << 'EOL' > /var/lib/jenkins/git_server/libD.git/hooks/post-receive
 #!/bin/sh
 
-curl http://jfrog.local:8080/git/notifyCommit?url=/git_server/libD.git
+curl http://jfrog.local:8080/git/notifyCommit?url=/var/lib/jenkins/git_server/libD.git
 EOL
 
-cat << 'EOL' > /git_server/App.git/hooks/post-receive
+cat << 'EOL' > /var/lib/jenkins/git_server/App.git/hooks/post-receive
 #!/bin/sh
 
-curl http://jfrog.local:8080/git/notifyCommit?url=/git_server/App.git
+curl http://jfrog.local:8080/git/notifyCommit?url=/var/lib/jenkins/git_server/App.git
 EOL
 
-cat << 'EOL' > /git_server/App2.git/hooks/post-receive
+cat << 'EOL' > /var/lib/jenkins/git_server/App2.git/hooks/post-receive
 #!/bin/sh
 
-curl http://jfrog.local:8080/git/notifyCommit?url=/git_server/App2.git
+curl http://jfrog.local:8080/git/notifyCommit?url=/var/lib/jenkins/git_server/App2.git
 EOL
 
-chmod +x /git_server/libA.git/hooks/post-receive
-chmod +x /git_server/libB.git/hooks/post-receive
-chmod +x /git_server/libC.git/hooks/post-receive
-chmod +x /git_server/libD.git/hooks/post-receive
-chmod +x /git_server/App.git/hooks/post-receive
-chmod +x /git_server/App2.git/hooks/post-receive
-chmod +x /git_server/products.git/hooks/post-receive
-chmod +x /git_server/release.git/hooks/post-receive
+chmod +x /var/lib/jenkins/git_server/libA.git/hooks/post-receive
+chmod +x /var/lib/jenkins/git_server/libB.git/hooks/post-receive
+chmod +x /var/lib/jenkins/git_server/libC.git/hooks/post-receive
+chmod +x /var/lib/jenkins/git_server/libD.git/hooks/post-receive
+chmod +x /var/lib/jenkins/git_server/App.git/hooks/post-receive
+chmod +x /var/lib/jenkins/git_server/App2.git/hooks/post-receive
+chmod +x /var/lib/jenkins/git_server/products.git/hooks/post-receive
+chmod +x /var/lib/jenkins/git_server/release.git/hooks/post-receive
 
 mkdir /bootstrap_repos && cd /bootstrap_repos
 
-git clone /git_server/libA.git
-git clone /git_server/libB.git
-git clone /git_server/libC.git
-git clone /git_server/libD.git
-git clone /git_server/App.git
-git clone /git_server/App2.git
+git clone /var/lib/jenkins/git_server/libA.git
+git clone /var/lib/jenkins/git_server/libB.git
+git clone /var/lib/jenkins/git_server/libC.git
+git clone /var/lib/jenkins/git_server/libD.git
+git clone /var/lib/jenkins/git_server/App.git
+git clone /var/lib/jenkins/git_server/App2.git
 
 conan export libA mycompany/stable
 conan export libB mycompany/stable
@@ -99,8 +101,8 @@ conan user -p ${artifactory_pass} -r conan-tmp admin
 
 conan upload '*' -r conan-develop --all --confirm
 
-docker run --network="host" -it conanio/gcc6 /bin/bash -c "sudo mkdir /git_server && cd /git_server && sudo git clone --bare https://github.com/conan-ci-cd-training/libA.git && sudo git clone --bare https://github.com/conan-ci-cd-training/libB.git && sudo git clone --bare https://github.com/conan-ci-cd-training/libC.git && sudo git clone --bare https://github.com/conan-ci-cd-training/libD.git && sudo git clone --bare https://github.com/conan-ci-cd-training/App.git && sudo git clone --bare https://github.com/conan-ci-cd-training/App2.git && conan config install https://github.com/conan-ci-cd-training/settings.git;conan remote add conan-develop http://${address}:8081/artifactory/api/conan/conan-develop;conan user -p ${artifactory_pass} -r conan-develop admin;conan install App/1.0@mycompany/stable --profile debug-gcc6 --build missing -r conan-develop;conan install App2/1.0@mycompany/stable --profile debug-gcc6 --build missing -r conan-develop;conan upload '*' --all -r conan-develop --confirm"
-docker run --network="host" -it conanio/gcc6 /bin/bash -c "sudo mkdir /git_server && cd /git_server && sudo git clone --bare https://github.com/conan-ci-cd-training/libA.git && sudo git clone --bare https://github.com/conan-ci-cd-training/libB.git && sudo git clone --bare https://github.com/conan-ci-cd-training/libC.git && sudo git clone --bare https://github.com/conan-ci-cd-training/libD.git && sudo git clone --bare https://github.com/conan-ci-cd-training/App.git && sudo git clone --bare https://github.com/conan-ci-cd-training/App2.git && conan config install https://github.com/conan-ci-cd-training/settings.git;conan remote add conan-develop http://${address}:8081/artifactory/api/conan/conan-develop;conan user -p ${artifactory_pass} -r conan-develop admin;conan install App/1.0@mycompany/stable --profile release-gcc6 --build missing -r conan-develop;conan install App2/1.0@mycompany/stable --profile release-gcc6 --build missing -r conan-develop;conan upload '*' --all -r conan-develop --confirm"
+docker run --network="host" -it conanio/gcc6 /bin/bash -c "sudo mkdir /var/lib/jenkins/git_server && cd /var/lib/jenkins/git_server && sudo git clone --bare https://github.com/conan-ci-cd-training/libA.git && sudo git clone --bare https://github.com/conan-ci-cd-training/libB.git && sudo git clone --bare https://github.com/conan-ci-cd-training/libC.git && sudo git clone --bare https://github.com/conan-ci-cd-training/libD.git && sudo git clone --bare https://github.com/conan-ci-cd-training/App.git && sudo git clone --bare https://github.com/conan-ci-cd-training/App2.git && conan config install https://github.com/conan-ci-cd-training/settings.git;conan remote add conan-develop http://${address}:8081/artifactory/api/conan/conan-develop;conan user -p ${artifactory_pass} -r conan-develop admin;conan install App/1.0@mycompany/stable --profile debug-gcc6 --build missing -r conan-develop;conan install App2/1.0@mycompany/stable --profile debug-gcc6 --build missing -r conan-develop;conan upload '*' --all -r conan-develop --confirm"
+docker run --network="host" -it conanio/gcc6 /bin/bash -c "sudo mkdir /var/lib/jenkins/git_server && cd /var/lib/jenkins/git_server && sudo git clone --bare https://github.com/conan-ci-cd-training/libA.git && sudo git clone --bare https://github.com/conan-ci-cd-training/libB.git && sudo git clone --bare https://github.com/conan-ci-cd-training/libC.git && sudo git clone --bare https://github.com/conan-ci-cd-training/libD.git && sudo git clone --bare https://github.com/conan-ci-cd-training/App.git && sudo git clone --bare https://github.com/conan-ci-cd-training/App2.git && conan config install https://github.com/conan-ci-cd-training/settings.git;conan remote add conan-develop http://${address}:8081/artifactory/api/conan/conan-develop;conan user -p ${artifactory_pass} -r conan-develop admin;conan install App/1.0@mycompany/stable --profile release-gcc6 --build missing -r conan-develop;conan install App2/1.0@mycompany/stable --profile release-gcc6 --build missing -r conan-develop;conan upload '*' --all -r conan-develop --confirm"
 
 #echo "------ Configure Jenkins jobs ------"
 
