@@ -31,14 +31,50 @@ git clone --bare https://github.com/conan-ci-cd-training/App2.git
 git clone --bare https://github.com/conan-ci-cd-training/products.git
 git clone --bare https://github.com/conan-ci-cd-training/release.git
 
-echo "curl http://${address}:8080/git/notifyCommit?url=/git_server/libA.git" > /git_server/libA.git/hooks/post-receive
-echo "curl http://${address}:8080/git/notifyCommit?url=/git_server/libB.git" > /git_server/libB.git/hooks/post-receive
-echo "curl http://${address}:8080/git/notifyCommit?url=/git_server/libC.git" > /git_server/libC.git/hooks/post-receive
-echo "curl http://${address}:8080/git/notifyCommit?url=/git_server/libD.git" > /git_server/libD.git/hooks/post-receive
-echo "curl http://${address}:8080/git/notifyCommit?url=/git_server/App.git" > /git_server/App.git/hooks/post-receive
-echo "curl http://${address}:8080/git/notifyCommit?url=/git_server/App2.git" > /git_server/App2.git/hooks/post-receive
-echo "curl http://${address}:8080/git/notifyCommit?url=/git_server/products.git" > /git_server/products.git/hooks/post-receive
-echo "curl http://${address}:8080/git/notifyCommit?url=/git_server/release.git" > /git_server/release.git/hooks/post-receive
+cat << 'EOL' > /git_server/libA.git/hooks/post-receive
+#!/bin/sh
+
+curl http://${address}:8080/git/notifyCommit?url=/git_server/libA.git
+EOL
+
+cat << 'EOL' > /git_server/libB.git/hooks/post-receive
+#!/bin/sh
+
+curl http://${address}:8080/git/notifyCommit?url=/git_server/libB.git
+EOL
+
+cat << 'EOL' > /git_server/libC.git/hooks/post-receive
+#!/bin/sh
+
+curl http://${address}:8080/git/notifyCommit?url=/git_server/libC.git
+EOL
+
+cat << 'EOL' > /git_server/libD.git/hooks/post-receive
+#!/bin/sh
+
+curl http://${address}:8080/git/notifyCommit?url=/git_server/libD.git
+EOL
+
+cat << 'EOL' > /git_server/App.git/hooks/post-receive
+#!/bin/sh
+
+curl http://${address}:8080/git/notifyCommit?url=/git_server/App.git
+EOL
+
+cat << 'EOL' > /git_server/App2.git/hooks/post-receive
+#!/bin/sh
+
+curl http://${address}:8080/git/notifyCommit?url=/git_server/App2.git
+EOL
+
+chmod +x /git_server/libA.git/hooks/post-receive
+chmod +x /git_server/libB.git/hooks/post-receive
+chmod +x /git_server/libC.git/hooks/post-receive
+chmod +x /git_server/libD.git/hooks/post-receive
+chmod +x /git_server/App.git/hooks/post-receive
+chmod +x /git_server/App2.git/hooks/post-receive
+chmod +x /git_server/products.git/hooks/post-receive
+chmod +x /git_server/release.git/hooks/post-receive
 
 mkdir /bootstrap_repos && cd /bootstrap_repos
 
