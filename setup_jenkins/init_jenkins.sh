@@ -117,9 +117,9 @@ docker run --network="host" -it conanio/gcc6 /bin/bash -c "sudo mkdir -p /var/li
 rm -rf /var/lib/jenkins/jobs/maven-pipeline/
 rm -rf /var/lib/jenkins/jobs/maven-promotion/
 
-curl https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/setup_jenkins/jenkins_jobs.tgz -O
+#curl https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/setup_jenkins/jenkins_jobs.tgz -O
 
-tar -xvf jenkins_jobs.tgz --directory /var/lib/jenkins/jobs
+#tar -xvf jenkins_jobs.tgz --directory /var/lib/jenkins/jobs
 
 echo "------ Restart Jenkins ------"
 
