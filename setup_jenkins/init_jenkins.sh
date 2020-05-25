@@ -34,37 +34,37 @@ git clone --bare https://github.com/conan-ci-cd-training/release.git
 cat << 'EOL' > /git_server/libA.git/hooks/post-receive
 #!/bin/sh
 
-curl http://${address}:8080/git/notifyCommit?url=/git_server/libA.git
+curl http://jfrog.local:8080/git/notifyCommit?url=/git_server/libA.git
 EOL
 
 cat << 'EOL' > /git_server/libB.git/hooks/post-receive
 #!/bin/sh
 
-curl http://${address}:8080/git/notifyCommit?url=/git_server/libB.git
+curl http://jfrog.local:8080/git/notifyCommit?url=/git_server/libB.git
 EOL
 
 cat << 'EOL' > /git_server/libC.git/hooks/post-receive
 #!/bin/sh
 
-curl http://${address}:8080/git/notifyCommit?url=/git_server/libC.git
+curl http://jfrog.local:8080/git/notifyCommit?url=/git_server/libC.git
 EOL
 
 cat << 'EOL' > /git_server/libD.git/hooks/post-receive
 #!/bin/sh
 
-curl http://${address}:8080/git/notifyCommit?url=/git_server/libD.git
+curl http://jfrog.local:8080/git/notifyCommit?url=/git_server/libD.git
 EOL
 
 cat << 'EOL' > /git_server/App.git/hooks/post-receive
 #!/bin/sh
 
-curl http://${address}:8080/git/notifyCommit?url=/git_server/App.git
+curl http://jfrog.local:8080/git/notifyCommit?url=/git_server/App.git
 EOL
 
 cat << 'EOL' > /git_server/App2.git/hooks/post-receive
 #!/bin/sh
 
-curl http://${address}:8080/git/notifyCommit?url=/git_server/App2.git
+curl http://jfrog.local:8080/git/notifyCommit?url=/git_server/App2.git
 EOL
 
 chmod +x /git_server/libA.git/hooks/post-receive
