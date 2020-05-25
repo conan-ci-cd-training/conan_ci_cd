@@ -76,7 +76,9 @@ chmod +x /var/lib/jenkins/git_server/libD.git/hooks/post-receive
 chmod +x /var/lib/jenkins/git_server/App.git/hooks/post-receive
 chmod +x /var/lib/jenkins/git_server/App2.git/hooks/post-receive
 
-mkdir /bootstrap_repos && cd /bootstrap_repos
+mkdir /bootstrap_repos
+
+cd /bootstrap_repos
 
 git clone /var/lib/jenkins/git_server/libA.git
 git clone /var/lib/jenkins/git_server/libB.git
@@ -98,6 +100,8 @@ conan user -p ${artifactory_pass} -r conan-develop admin
 conan user -p ${artifactory_pass} -r conan-tmp admin
 
 conan upload '*' -r conan-develop --all --confirm
+
+cd /var/lib/jenkins
 
 docker run --network="host" -it conanio/gcc6 /bin/bash -c "sudo mkdir -p /var/lib/jenkins/git_server && cd /var/lib/jenkins/git_server && sudo git clone --bare https://github.com/conan-ci-cd-training/libA.git && sudo git clone --bare https://github.com/conan-ci-cd-training/libB.git && sudo git clone --bare https://github.com/conan-ci-cd-training/libC.git && sudo git clone --bare https://github.com/conan-ci-cd-training/libD.git && sudo git clone --bare https://github.com/conan-ci-cd-training/App.git && sudo git clone --bare https://github.com/conan-ci-cd-training/App2.git && conan config install https://github.com/conan-ci-cd-training/settings.git;conan remote add conan-develop http://${address}:8081/artifactory/api/conan/conan-develop;conan user -p ${artifactory_pass} -r conan-develop admin;conan install App/1.0@mycompany/stable --profile debug-gcc6 --build missing -r conan-develop;conan install App2/1.0@mycompany/stable --profile debug-gcc6 --build missing -r conan-develop;conan upload '*' --all -r conan-develop --confirm"
 docker run --network="host" -it conanio/gcc6 /bin/bash -c "sudo mkdir -p /var/lib/jenkins/git_server && cd /var/lib/jenkins/git_server && sudo git clone --bare https://github.com/conan-ci-cd-training/libA.git && sudo git clone --bare https://github.com/conan-ci-cd-training/libB.git && sudo git clone --bare https://github.com/conan-ci-cd-training/libC.git && sudo git clone --bare https://github.com/conan-ci-cd-training/libD.git && sudo git clone --bare https://github.com/conan-ci-cd-training/App.git && sudo git clone --bare https://github.com/conan-ci-cd-training/App2.git && conan config install https://github.com/conan-ci-cd-training/settings.git;conan remote add conan-develop http://${address}:8081/artifactory/api/conan/conan-develop;conan user -p ${artifactory_pass} -r conan-develop admin;conan install App/1.0@mycompany/stable --profile release-gcc6 --build missing -r conan-develop;conan install App2/1.0@mycompany/stable --profile release-gcc6 --build missing -r conan-develop;conan upload '*' --all -r conan-develop --confirm"
