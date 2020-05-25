@@ -76,9 +76,9 @@ chmod +x /var/lib/jenkins/git_server/libD.git/hooks/post-receive
 chmod +x /var/lib/jenkins/git_server/App.git/hooks/post-receive
 chmod +x /var/lib/jenkins/git_server/App2.git/hooks/post-receive
 
-mkdir /bootstrap_repos
+mkdir /workdir
 
-cd /bootstrap_repos
+cd /workdir
 
 git clone /var/lib/jenkins/git_server/libA.git
 git clone /var/lib/jenkins/git_server/libB.git
