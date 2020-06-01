@@ -77,6 +77,7 @@ chmod +x /var/lib/jenkins/git_server/App.git/hooks/post-receive
 chmod +x /var/lib/jenkins/git_server/App2.git/hooks/post-receive
 
 mkdir /workdir
+mkdir /ci_labs
 
 cd /workdir
 
