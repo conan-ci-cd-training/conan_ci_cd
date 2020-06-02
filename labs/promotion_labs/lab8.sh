@@ -1,6 +1,5 @@
 #!/bin/bash
 
-## lab13: 
+## lab8: create and upload a debian package
 
-cd /home/conan/conan_ci_cd/labs/promotion
 ./generateDebianPkg.sh conan conan2020

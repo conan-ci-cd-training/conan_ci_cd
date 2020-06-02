@@ -1,8 +1,6 @@
 #!/bin/bash
 
-## lab14: 
-
-cd /home/conan/conan_ci_cd/labs/promotion
+## lab9: create a custom Build info
 
 # define “artifact section” in build info
 # won’t be reuploaded as the JFrog CLI is checksum aware
