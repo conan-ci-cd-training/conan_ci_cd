@@ -78,6 +78,30 @@ chmod +x /var/lib/jenkins/git_server/App2.git/hooks/post-receive
 
 mkdir /workdir
 mkdir /ci_labs
+mkdir /dev_labs
+mkdir /promotion_labs
+mkdir /promotion_labs/automation
+
+curl -o /ci_labs/lab3.sh https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/labs/ci_labs/lab3.sh
+curl -o /ci_labs/lab4.sh https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/labs/ci_labs/lab4.sh
+
+curl -o /dev_labs/lab1.sh https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/labs/dev_labs/lab1.sh
+curl -o /dev_labs/lab2.sh https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/labs/dev_labs/lab2.sh
+curl -o /dev_labs/lab5.sh https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/labs/dev_labs/lab5.sh
+
+curl -o /promotion_labs/lab6.sh https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/labs/promotion_labs/lab6.sh
+curl -o /promotion_labs/lab7.sh https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/labs/promotion_labs/lab7.sh
+curl -o /promotion_labs/lab8.sh https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/labs/promotion_labs/lab8.sh
+curl -o /promotion_labs/lab9.sh https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/labs/promotion_labs/lab9.sh
+curl -o /promotion_labs/lab10.sh https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/labs/promotion_labs/lab10.sh
+curl -o /promotion_labs/generateDebianPkg.sh https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/labs/promotion_labs/generateDebianPkg.sh
+
+curl -o /promotion_labs/automation/filespec.json https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/labs/promotion_labs/automation/filespec.json
+curl -o /promotion_labs/automation/query.aql https://raw.githubusercontent.com/conan-ci-cd-training/conan_ci_cd/master/labs/promotion_labs/automation/query.aql
+
+find /ci_labs -name "*.sh" -exec chmod +x {} \;
+find /dev_labs -name "*.sh" -exec chmod +x {} \;
+find /promotion_labs -name "*.sh" -exec chmod +x {} \;
 
 cd /workdir
 
