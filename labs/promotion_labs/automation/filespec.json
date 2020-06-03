@@ -2,12 +2,12 @@
   "files": [{
     "aql": {
       "items.find": {
-	"repo": "conan-metadata",
-	"name" : { "$match" : "*.lock"},
+      "repo": "conan-metadata",
+      "name" : { "$match" : "*.lock"},
         "$and": [
-          { "@build.name": "conan-app" }, 
-          { "@build.number": "1" }, 
-          { "@profile": "gcc6-release" }
+          { "@build.name": "products/master" }, 
+          { "@build.number": "12" }, 
+          { "@profile": "release-gcc6" }
         ]
       }
     },
