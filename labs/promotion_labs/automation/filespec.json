@@ -6,7 +6,7 @@
       "name" : { "$match" : "*.lock"},
         "$and": [
           { "@build.name": "products/master" }, 
-          { "@build.number": "12" }, 
+          { "@build.number": "17" }, 
           { "@profile": "release-gcc6" }
         ]
       }
