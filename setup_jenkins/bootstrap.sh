@@ -48,8 +48,6 @@ echo "------ Conan client configuration ------"
 
 conan config install https://github.com/conan-ci-cd-training/settings.git
 
-conan remote add conan-develop http://${address}:8081/artifactory/api/conan/conan-develop
-conan remote add conan-tmp http://${address}:8081/artifactory/api/conan/conan-tmp
 conan user -p ${password} -r conan-develop ${user}
 conan user -p ${password} -r conan-tmp ${user}
 
